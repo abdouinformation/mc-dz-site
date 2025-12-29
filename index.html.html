@@ -1,0 +1,809 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MC DZ - برامج مايكروسوفت أوفيس</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* التهيئة العامة */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --primary: #2c3e50;
+            --secondary: #0078d4;
+            --accent: #f39c12;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        /* الترويسة */
+        header {
+            background-color: var(--primary);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-left: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-right: 20px;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav ul li a:hover {
+            color: var(--accent);
+        }
+        
+        /* القسم الرئيسي */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--secondary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #005a9e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .btn-accent {
+            background-color: var(--accent);
+        }
+        
+        .btn-accent:hover {
+            background-color: #e67e22;
+        }
+        
+        .btn-office2016 {
+            background-color: #d83b01;
+        }
+        
+        .btn-office2016:hover {
+            background-color: #b32d00;
+        }
+        
+        .btn-office2007 {
+            background-color: #0078d4;
+        }
+        
+        .btn-office2007:hover {
+            background-color: #005a9e;
+        }
+        
+        /* قسم الميزات */
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--primary);
+            font-size: 2.2rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .feature-card {
+            background-color: var(--light);
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--accent);
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        /* قسم البرامج */
+        .software {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+        
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .software-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .software-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .software-image {
+            height: 250px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .software-image i {
+            font-size: 8rem;
+            color: var(--secondary);
+        }
+        
+        .software-image.office2016 {
+            background: linear-gradient(135deg, #d83b01 0%, #ff6b35 100%);
+        }
+        
+        .software-image.office2016 i {
+            color: white;
+        }
+        
+        .software-image.office2007 {
+            background: linear-gradient(135deg, #0078d4 0%, #5ca9f5 100%);
+        }
+        
+        .software-image.office2007 i {
+            color: white;
+        }
+        
+        .software-content {
+            padding: 25px;
+        }
+        
+        .software-content h3 {
+            margin-bottom: 10px;
+            color: var(--primary);
+            font-size: 1.5rem;
+        }
+        
+        .software-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--secondary);
+            margin: 15px 0;
+        }
+        
+        .software-price span {
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .software-features {
+            list-style: none;
+            margin: 20px 0;
+        }
+        
+        .software-features li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+        
+        .software-features li:last-child {
+            border-bottom: none;
+        }
+        
+        .software-features li i {
+            margin-left: 10px;
+            color: var(--accent);
+        }
+        
+        /* نموذج الطلب */
+        .order-form {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .form-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            border: 1px solid #eee;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--accent);
+            outline: none;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .submit-btn:hover {
+            background-color: #005a9e;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* قسم الأسئلة الشائعة */
+        .faq {
+            padding: 80px 0;
+            background-color: #f5f5f5;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+            overflow: hidden;
+            background-color: white;
+        }
+        
+        .faq-question {
+            padding: 20px;
+            background-color: var(--light);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 500;
+        }
+        
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 20px;
+            max-height: 500px;
+        }
+        
+        /* الفوتر */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 50px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            color: var(--accent);
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        /* التجاوب مع الشاشات المختلفة */
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            nav ul {
+                margin-top: 20px;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .software-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- الترويسة -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">
+                    <i class="fas fa-desktop"></i>
+                    MC DZ
+                </a>
+                <nav>
+                    <ul>
+                        <li><a href="#features">الميزات</a></li>
+                        <li><a href="#software">البرامج</a></li>
+                        <li><a href="#order">طلب البرنامج</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                        <li><a href="#contact">اتصل بنا</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- القسم الرئيسي -->
+    <section class="hero">
+        <div class="container">
+            <h1>مرحباً بكم في MC DZ</h1>
+            <p>متجر البرامج الأول في الجزائر - احصل على برامج مايكروسوفت أوفيس الأصلية بأفضل الأسعار</p>
+            <a href="#software" class="btn">استعرض البرامج</a>
+        </div>
+    </section>
+
+    <!-- قسم الميزات -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">مزايا متجرنا</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>توصيل فوري</h3>
+                    <p>نوصل البرامج خلال دقائق عبر الهاتف بعد تأكيد الطلب</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>برامج أصلية</h3>
+                    <p>جميع البرامج لدينا أصلية ومرخصة مع مفاتيح تفعيل صالحة</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>دعم فني</h3>
+                    <p>فريق دعم فني متاح لمساعدتك في التثبيت والتفعيل</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-money-bill-wave"></i>
+                    </div>
+                    <h3>أسعار تنافسية</h3>
+                    <p>أفضل الأسعار في السوق الجزائري مع ضمان الجودة</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- قسم البرامج -->
+    <section class="software" id="software">
+        <div class="container">
+            <h2 class="section-title">برامجنا المتاحة</h2>
+            <div class="software-grid">
+                <!-- أوفيس 2016 -->
+                <div class="software-card">
+                    <div class="software-image office2016">
+                        <i class="fas fa-file-word"></i>
+                    </div>
+                    <div class="software-content">
+                        <h3>مايكروسوفت أوفيس 2016</h3>
+                        <p>حزمة أوفيس كاملة مع جميع التحديثات - النسخة الأصلية</p>
+                        <div class="software-price">
+                            1,500 د.ج <span>(للكمبيوتر الواحد)</span>
+                        </div>
+                        <ul class="software-features">
+                            <li><i class="fas fa-check"></i> Word 2016 كامل</li>
+                            <li><i class="fas fa-check"></i> Excel 2016 كامل</li>
+                            <li><i class="fas fa-check"></i> PowerPoint 2016 كامل</li>
+                            <li><i class="fas fa-check"></i> Outlook 2016 كامل</li>
+                            <li><i class="fas fa-check"></i> مفاتيح تفعيل أصلية</li>
+                            <li><i class="fas fa-check"></i> دعم فني مجاني</li>
+                        </ul>
+                        <a href="#order" class="btn btn-office2016" onclick="selectSoftware('مايكروسوفت أوفيس 2016', '1500')">اختر هذا البرنامج</a>
+                    </div>
+                </div>
+                
+                <!-- أوفيس 2007 -->
+                <div class="software-card">
+                    <div class="software-image office2007">
+                        <i class="fas fa-file-excel"></i>
+                    </div>
+                    <div class="software-content">
+                        <h3>مايكروسوفت أوفيس 2007</h3>
+                        <p>حزمة أوفيس كلاسيكية موثوقة وسهلة الاستخدام</p>
+                        <div class="software-price">
+                            890 د.ج <span>(للكمبيوتر الواحد)</span>
+                        </div>
+                        <ul class="software-features">
+                            <li><i class="fas fa-check"></i> Word 2007 كامل</li>
+                            <li><i class="fas fa-check"></i> Excel 2007 كامل</li>
+                            <li><i class="fas fa-check"></i> PowerPoint 2007 كامل</li>
+                            <li><i class="fas fa-check"></i> خفيف وسريع</li>
+                            <li><i class="fas fa-check"></i> مناسب للأجهزة القديمة</li>
+                            <li><i class="fas fa-check"></i> مفاتيح تفعيل مضمونة</li>
+                        </ul>
+                        <a href="#order" class="btn btn-office2007" onclick="selectSoftware('مايكروسوفت أوفيس 2007', '890')">اختر هذا البرنامج</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- نموذج الطلب -->
+    <section class="order-form" id="order">
+        <div class="container">
+            <h2 class="section-title">اطلب برنامجك الآن</h2>
+            <div class="form-container">
+                <form id="orderForm" action="https://getform.io/f/bolqoyma" method="POST">
+                    <input type="hidden" id="selectedSoftware" name="software" value="">
+                    <input type="hidden" id="selectedPrice" name="price" value="">
+                    
+                    <div class="form-group">
+                        <label>البرنامج المختار</label>
+                        <div id="softwareSelection" style="padding: 15px; background-color: #f8f9fa; border-radius: 5px; text-align: center; font-weight: bold; color: var(--primary); border: 2px dashed #ddd;">
+                            لم يتم اختيار برنامج بعد
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">الاسم الكامل</label>
+                            <input type="text" id="name" name="name" class="form-control" placeholder="أدخل اسمك الكامل" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">رقم الهاتف</label>
+                            <input type="tel" id="phone" name="phone" class="form-control" placeholder="أدخل رقم هاتفك" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="state">الولاية</label>
+                            <input type="text" id="state" name="state" class="form-control" placeholder="أدخل ولايتك" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">البلدية</label>
+                            <input type="text" id="city" name="city" class="form-control" placeholder="أدخل بلديتك" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">ملاحظات إضافية (اختياري)</label>
+                        <textarea id="message" name="message" class="form-control" rows="4" placeholder="أي ملاحظات أو استفسارات إضافية"></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">إرسال الطلب</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- الأسئلة الشائعة -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <h2 class="section-title">الأسئلة الشائعة</h2>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>كيف سأستلم البرنامج بعد الشراء؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>بعد إتمام عملية الشراء، سيتصل بك فريقنا على رقم الهاتف الذي قدمته لإرسال رابط تحميل البرنامج ومفتاح التفعيل.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل البرامج أصلية ومرخصة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نعم، جميع البرامج التي نقدمها أصلية مع مفاتيح تفعيل صالحة ومرخصة من مايكروسوفت.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>ماذا أفعل إذا واجهت مشكلة في التثبيت؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>فريق الدعم الفني لدينا متاح على مدار الساعة لمساعدتك في أي مشكلة في التثبيت أو التفعيل.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>هل يمكنني استخدام البرنامج على أكثر من جهاز؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>كل ترخيص صالح لجهاز كمبيوتر واحد فقط. إذا أردت تثبيته على أكثر من جهاز، تحتاج لشراء تراخيص إضافية.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>ما هي طرق الدفع المتاحة؟</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>نحن نقبل الدفع عند الاستلام في جميع الولايات، بالإضافة إلى التحويل البنكي والدفع عبر البطاقات.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>عن MC DZ</h3>
+                    <p>متجر البرامج الأول في الجزائر، نقدم برامج مايكروسوفت أوفيس الأصلية بأسعار تنافسية مع دعم فني مميز.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="#features">الميزات</a></li>
+                        <li><a href="#software">البرامج</a></li>
+                        <li><a href="#order">طلب البرنامج</a></li>
+                        <li><a href="#faq">الأسئلة الشائعة</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>اتصل بنا</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> ya728516@gmail.com</li>
+                        <li><i class="fas fa-phone"></i> +213 xxx xx xx xx</li>
+                        <li><i class="fas fa-map-marker-alt"></i> جميع ولايات الجزائر</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>جميع الحقوق محفوظة &copy; 2024 MC DZ - متجر البرامج</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // تفعيل الأسئلة الشائعة
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentNode;
+                item.classList.toggle('active');
+            });
+        });
+        
+        // اختيار البرنامج
+        function selectSoftware(softwareName, price) {
+            document.getElementById('selectedSoftware').value = softwareName;
+            document.getElementById('selectedPrice').value = price;
+            
+            const selectionDiv = document.getElementById('softwareSelection');
+            selectionDiv.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span>${softwareName}</span>
+                    <span style="color: var(--secondary); font-size: 1.2rem;">${price} د.ج</span>
+                </div>
+            `;
+            selectionDiv.style.border = '2px solid var(--secondary)';
+            selectionDiv.style.backgroundColor = '#f0f8ff';
+            
+            // التمرير إلى نموذج الطلب
+            document.querySelector('#order').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // تأكيد إرسال النموذج
+        document.getElementById('orderForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const selectedSoftware = document.getElementById('selectedSoftware').value;
+            if (!selectedSoftware) {
+                alert('يرجى اختيار برنامج أولاً');
+                return;
+            }
+            
+            const formData = new FormData(this);
+            
+            // عرض تحميل
+            const submitBtn = this.querySelector('.submit-btn');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'جاري الإرسال...';
+            submitBtn.disabled = true;
+            
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            }).then(response => {
+                if (response.ok) {
+                    alert('تم إرسال طلبك بنجاح! سنتواصل معك خلال دقائق.');
+                    this.reset();
+                    document.getElementById('softwareSelection').innerHTML = 'لم يتم اختيار برنامج بعد';
+                    document.getElementById('softwareSelection').style.border = '2px dashed #ddd';
+                    document.getElementById('softwareSelection').style.backgroundColor = '#f8f9fa';
+                    document.getElementById('selectedSoftware').value = '';
+                    document.getElementById('selectedPrice').value = '';
+                } else {
+                    alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.');
+                }
+            }).catch(error => {
+                alert('حدث خطأ أثناء إرسال الطلب. يرجى المحاولة مرة أخرى.');
+            }).finally(() => {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+    </script>
+</body>
+</html>
